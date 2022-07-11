@@ -1,9 +1,9 @@
 # concept : 2d Lists
 '''
-Sorting rows in a given 2d list is quite easy, just think about a given 1D list and convert it into a suitable mXn matrix or 2d list which looks sorted
+Sorting rows in a given 2d list is quite easy, just think about a given 1D list and convert it into a given suitable mXn matrix or 2d list which looks sorted
 
 See the below example
-  
+
   ## Representation
 
   2 5 1 3 3 4 9 6 7
@@ -16,7 +16,7 @@ See the below example
 
   6 7 9
 
-  
+
   ## Input
 
   [2,5,1,3,3,4,9,6,7]
@@ -28,29 +28,42 @@ See the below example
 
 import unittest
 
-def oneD_to_sorted2D(lst):
+def oneD_to_sorted2D(lst,shape):
   sorted_list = []
-
+  # Write your code here
+  lst.sort()
+  b=int(shape[0])
+  c=int(shape[2])
+  l=[]
+  j=0
+  for i in range(0,len(lst)):
+    if(j>=c):
+      sorted_list.append(l)
+      l=[]
+      j=0
+    l.append(lst[i])
+    j=j+1
+  sorted_list.append(l)
   return sorted_list
 
 class Dict_to_list(unittest.TestCase):
   def test_01(self):
     input = [10,3,2,5,6,7]
     output = [[2, 3, 5], [6, 7, 10]]
-    
-    self.assertEqual(oneD_to_sorted2D(input), output)
+
+    self.assertEqual(oneD_to_sorted2D(input,"2x3"), output)
 
   def test_02(self):
     input = [20,30,4,15,60,87,12,3,4,78,62,41]
     output = [[3, 4, 4], [12, 15, 20], [30, 41, 60], [62, 78, 87]]
-    
-    self.assertEqual(oneD_to_sorted2D(input), output)
+
+    self.assertEqual(oneD_to_sorted2D(input,"4x3"), output)
 
   def test_03(self):
     input = [3,30,3,10,5,5,4,5,1,1,3,3]
     output = [[1, 1, 3, 3], [3, 3, 4, 5], [5, 5, 10, 30]]
-    
-    self.assertEqual(oneD_to_sorted2D(input), output)
 
-if __name__ == '__main__':
+    self.assertEqual(oneD_to_sorted2D(input, "3x4"), output)
+
+if __name__ == '_main_':
   unittest.main(verbosity=2)
